@@ -3,6 +3,7 @@ package com.example.eurekarserver.repo;
 import java.util.List;
 
 import com.example.eurekarserver.exception.AccountNotFoundException;
+import com.example.eurekarserver.exception.MinimumBalanceException;
 import com.example.eurekarserver.model.Account;
 
 public interface AccountRepository {
@@ -18,4 +19,8 @@ public interface AccountRepository {
 	void deleteAccountByAccountNumber(String accountNumber) throws AccountNotFoundException;
 	
 	Account getAccountByEmail(String email) throws AccountNotFoundException;
+	
+	Account depositAmmount(String accountNumber, Account account) throws AccountNotFoundException;
+	
+	Account withdrawalAmmount(String accountNumber, Account account) throws AccountNotFoundException, MinimumBalanceException;
 }

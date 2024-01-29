@@ -24,8 +24,11 @@ public class AccountAppApplication {
 	@PostConstruct
 	public void init() throws Exception {
 		// TODO Auto-generated method stub
-		accountRepository.insertAccount(new Account("ACC-001", "John Doe", "Bangalore","john@email.com"));
-		accountRepository.insertAccount(new Account("ACC-002", "Mary Lawrence", "New York","mary@email.com"));
+		/*
+		 * accountRepository.insertAccount(new Account("ACC-001", "John Doe",
+		 * "Bangalore","john@email.com")); accountRepository.insertAccount(new
+		 * Account("ACC-002", "Mary Lawrence", "New York","mary@email.com"));
+		 */
 	}
 
 }

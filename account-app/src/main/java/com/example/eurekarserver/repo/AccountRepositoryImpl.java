@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.example.eurekarserver.exception.AccountNotFoundException;
+import com.example.eurekarserver.exception.MinimumBalanceException;
 import com.example.eurekarserver.model.Account;
 
 import jakarta.persistence.TypedQuery;
@@ -89,5 +90,40 @@ public class AccountRepositoryImpl implements AccountRepository{
 		if(typedQuery.getResultList().size() == 0)
 			throw new AccountNotFoundException("account with email: "+email+" not found.");
 		return typedQuery.getSingleResult();
+	}
+
+	@Override
+	public Account depositAmmount(String accountNumber, Account account) throws AccountNotFoundException {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Account tempAccount = getAccountByAccountNumber(accountNumber);
+		if (tempAccount == null) {
+			throw new AccountNotFoundException("account with " + accountNumber + " not found");
+		}
+		tempAccount.setAmmount(tempAccount.getAmmount() + account.getAmmount());
+		session.getTransaction().begin();
+		session.merge(tempAccount);
+		session.getTransaction().commit();
+		
+		return tempAccount;
+	}
+
+	@Override
+	public Account withdrawalAmmount(String accountNumber, Account account) throws AccountNotFoundException, MinimumBalanceException {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Account tempAccount = getAccountByAccountNumber(accountNumber);
+		if (tempAccount == null) {
+			throw new AccountNotFoundException("account with " + accountNumber + " not found");
+		}
+		if(tempAccount.getAmmount() - account.getAmmount() < 1000)
+			throw new MinimumBalanceException("Account will have less than minimum balance. Current Balance: ");
+		
+		tempAccount.setAmmount(tempAccount.getAmmount() - account.getAmmount());
+		session.getTransaction().begin();
+		session.merge(tempAccount);
+		session.getTransaction().commit();
+		
+		return tempAccount;
 	}	
 }

@@ -30,12 +30,21 @@ public class Account {
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "ammount")
+	private float ammount;
 
-	public Account(String accountHolderName, String accountHolderAddress, String email) {
+	public Account(String accountHolderName, String accountHolderAddress, String email, float ammount) {
 		super();
 		this.accountHolderName = accountHolderName;
 		this.accountHolderAddress = accountHolderAddress;
 		this.email = email;
+		this.ammount = ammount;
+	}
+
+	public Account(float ammount) {
+		super();
+		this.ammount = ammount;
 	}
 	
 	

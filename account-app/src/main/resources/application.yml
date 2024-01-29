@@ -4,21 +4,19 @@ spring:
   application:
     name: account-app
   datasource:
-      url: jdbc:h2:mem:testDB
-      username: sa
-      password: sa
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2
+      url: jdbc:mysql://44.222.146.112:3307/hr
+      username: root  
+      password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://44.192.37.169:8761/eureka
+      defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     prefer-ip-address: true

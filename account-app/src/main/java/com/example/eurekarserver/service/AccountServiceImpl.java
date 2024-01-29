@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.example.eurekarserver.exception.AccountNotFoundException;
+import com.example.eurekarserver.exception.MinimumBalanceException;
 import com.example.eurekarserver.model.Account;
 import com.example.eurekarserver.repo.AccountRepository;
 
@@ -50,6 +51,19 @@ public class AccountServiceImpl implements AccountService {
 	public Account getAccountByEmail(String email) throws AccountNotFoundException {
 		// TODO Auto-generated method stub
 		return accountRepository.getAccountByEmail(email);
+	}
+
+	@Override
+	public Account depositAmmount(String accountNumber, Account account) throws AccountNotFoundException {
+		// TODO Auto-generated method stub
+		return accountRepository.depositAmmount(accountNumber, account);
+	}
+
+	@Override
+	public Account withdrawalAmmount(String accountNumber, Account account)
+			throws AccountNotFoundException, MinimumBalanceException {
+		// TODO Auto-generated method stub
+		return accountRepository.withdrawalAmmount(accountNumber, account);
 	}
 	
 
